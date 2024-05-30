@@ -12,7 +12,8 @@
 	"dependencies": {
 		"@cloudflare/itty-router-openapi": "^1.0.1",
 		"@permaweb/aoconnect": "^0.0.55",
-		"dotenv": "^16.4.5"
+		"dotenv": "^16.4.5",
+		"jwt-claims": "^1.0.1"
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20240529.0",

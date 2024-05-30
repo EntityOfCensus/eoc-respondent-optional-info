@@ -12,8 +12,8 @@ export const Question = {
 	question: String,
 	questionType: String,
     category: String,
-	possibleAnswers: Array<String>,
-	answers: Array<String>	
+	possibleAnswers: String,
+	answers: String	
 };
 
 
@@ -21,19 +21,19 @@ export const TargetGroup = {
 	age: Number,
 	gender: String,
     country: String,
-	surveyData: Array<typeof Question>
+	surveyData: Question
 };
 
 export const NewRespondentProfileSurvey = {
 	type: String,
 	respondentOthentSub: String,
-    targetGroups: Array<typeof TargetGroup> 
+    targetGroups: TargetGroup
 };
 
 export const RespondentProfileSurvey = {
 	id: String,
 	type: String,
 	respondentOthentSub: String,
-    targetGroups: Array<typeof TargetGroup> 	
+    targetGroups: TargetGroup 	
 };
 
