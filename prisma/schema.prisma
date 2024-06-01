@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["respondent_profile_survey"]
+}
+
+model RespondentProfileSurveyIndex {
+  othentId String @id
+  currentSurveyId String
+  lastSurveyId String 
+
+  @@schema("respondent_profile_survey")
+
+}
+
+model ProfileSurveyStatistic {
+  nameId String @id
+  QuestionStatistic QuestionStatistic[]
+
+  @@schema("respondent_profile_survey")
+
+}
+
+model QuestionStatistic {
+  id       Int    @id @default(autoincrement())
+  question String 
+  answer String
+  dateOfBirth  DateTime?
+  country String
+  count Int
+  profileSurveyStatistic ProfileSurveyStatistic @relation(fields: [profileSurveyStatisticId], references: [nameId])
+  profileSurveyStatisticId String
+
+  @@schema("respondent_profile_survey")
+}
+

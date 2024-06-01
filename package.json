@@ -2,6 +2,9 @@
 	"name": "cloudflare-workers-openapi",
 	"version": "0.0.1",
 	"private": true,
+	"prisma": {
+		"seed": "node prisma/seed.js"
+	},
 	"scripts": {
 		"deploy": "wrangler deploy",
 		"env": "dotenv -e .dev.vars",
@@ -12,12 +15,14 @@
 	"dependencies": {
 		"@cloudflare/itty-router-openapi": "^1.0.1",
 		"@permaweb/aoconnect": "^0.0.55",
+		"@prisma/client": "^5.14.0",
 		"jwt-claims": "^1.0.1"
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20240529.0",
 		"@types/node": "^20.5.7",
 		"@types/service-worker-mock": "^2.0.1",
+		"prisma": "^5.14.0",
 		"wrangler": "^3.0.0"
 	}
 }
