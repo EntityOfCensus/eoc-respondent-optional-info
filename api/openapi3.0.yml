@@ -15,6 +15,154 @@ servers:
   - url: https://eoc-respondent-basic-info.infra-workers.workers.dev/
   - url: http://localhost:8787
 paths:
+  /question-statistic:
+    get:
+      tags:
+        - QuestionStatistic
+      summary: Returns all QuestionStatistic from the system that the user has access to
+      description: Returns all QuestionStatistic from the system that the user has access to
+      operationId: findQuestionStatistic
+      parameters:
+        - schema:
+            type: number
+            description: Page number
+          required: true
+          description: Page number
+          name: page
+          in: query
+        - schema:
+            type: boolean
+            description: Filter by completed flag
+          required: false
+          description: Filter by completed flag
+          name: isCompleted
+          in: query
+      responses:
+        '200':
+          description: QuestionStatistic response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/QuestionStatistic'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - QuestionStatistic
+      summary: Creates / Update QuestionStatistic in the store. 
+      description: Creates/ Update QuestionStatistic in the store. 
+      operationId: addQuestionStatistic
+      requestBody:
+        description: QuestionStatistic to add / update to the store
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              $ref: '#/components/schemas/QuestionStatistic'
+      responses:
+        '200':
+          description: OK
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /suvery-index:
+    post:
+      tags:
+        - RespondentProfileSurveyIndex
+      summary: Creates a new RespondentProfileSurveyIndex in the store.  Duplicates are not allowed
+      description: Creates a new RespondentProfileSurveyIndex in the store.  Duplicates are not allowed
+      operationId: addRespondentProfileSurveyIndex
+      requestBody:
+        description: RespondentProfileSurveyIndex to add to the store
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewRespondentProfileSurveyIndex'
+      responses:
+        '200':
+          description: RespondentProfileSurveyIndex response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespondentProfileSurveyIndex'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /suvery-index/{id}:
+    get:
+      tags:
+        - RespondentProfileSurveyIndex
+      summary: Returns a RespondentProfileSurveyIndex based on a single ID
+      description: Returns a RespondentProfileSurveyIndex based on a single ID
+      operationId: findRespondentProfileSurveyIndexById
+      parameters:
+        - name: id
+          in: path
+          description: ID of RespondentProfileSurveyIndex to fetch
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: RespondentProfileSurveyIndex response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespondentProfileSurveyIndex'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - RespondentProfileSurveyIndex
+      summary: Update RespondentProfileSurveyIndex in the store based on a single ID
+      description: Update RespondentProfileSurveyIndex in the store based on a single ID
+      operationId: updateRespondentProfileSurveyIndex
+      parameters:
+        - name: id
+          in: path
+          description: ID of RespondentProfileSurveyIndex to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: RespondentProfileSurveyIndex to update to the store
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewRespondentProfileSurveyIndex'
+      responses:
+        '200':
+          description: RespondentProfileSurveyIndex response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespondentProfileSurveyIndex'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
   /suvery-info:
     get:
       tags:
@@ -167,6 +315,22 @@ components:
       scheme: bearer
       bearerFormat: JWT    # optional, arbitrary value for documentation purposes
   schemas:
+    NewRespondentProfileSurveyIndex:
+      type: object
+      properties:
+        currentSurveyId:
+          type: string
+        lastSurveyId:
+          type: string
+    RespondentProfileSurveyIndex:
+      allOf:
+        - $ref: '#/components/schemas/NewRespondentProfileSurveyIndex'      
+        - type: object
+          required:
+            - othentId
+          properties:
+            othentId:
+              type: string  
     RespondentProfileSurvey:
       allOf:
         - $ref: '#/components/schemas/NewRespondentProfileSurvey'
@@ -221,6 +385,29 @@ components:
           type: array
           items:
             type: string
+    QuestionStatistic:
+      type: object
+      required:
+        - profileSurveyStatisticId
+        - question
+        - answer
+        - dateOfBirth
+        - country
+      properties:
+        profileSurveyStatisticId: 
+          type: string
+        question: 
+          type: string
+        answer: 
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+        country:
+          type: string
+        count: 
+          type: number
+          format: int32
     Error:
       type: object
       required:
