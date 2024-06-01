@@ -4,7 +4,12 @@ import {
 	Query,
 } from "@cloudflare/itty-router-openapi";
 import { RespondentProfileSurvey } from "../../types";
-
+import {
+	dryrun,
+	createDataItemSigner,
+	message,
+	connect,
+  } from "@permaweb/aoconnect";
 export class RespondentProfileSurveyList extends OpenAPIRoute {
 	static schema: OpenAPIRouteSchema = {
 		tags: ["RespondentProfileSurvey"],
@@ -45,7 +50,19 @@ export class RespondentProfileSurveyList extends OpenAPIRoute {
 		data: Record<string, any>
 	) {
 		const { page, isCompleted } = data.query;
-        return [];
+		try {
+			const tx = await dryrun({
+			  process: "taFQ_bgJhuBLNP7VXMdYq9xq9938oqinxboiLi7k2M8",
+			  tags: [{ name: "Action", value: "GetSurveys" }],
+			});
+		
+			console.log(tx.Messages[0].Data);
+		
+			return JSON.parse(tx.Messages[0].Data);
+		  } catch (error) {
+			console.log(error);
+			return {};
+		  }
 	}
     
 }

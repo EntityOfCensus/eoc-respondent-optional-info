@@ -5,7 +5,7 @@ import { TaskFetch } from "./endpoints/taskFetch";
 import { TaskList } from "./endpoints/taskList";
 import { createCors } from 'itty-router';
 import secure from './utils/secure';
-import validatePathId from './endpoints/survey-info/validate.paths';
+import validatePathId from './utils/validate.paths';
 import { RespondentProfileSurveyList } from "./endpoints/survey-info/respondentProfileSurveyList";
 import { RespondentProfileSurveyCreate } from "./endpoints/survey-info/respondentProfileSurveyCreate";
 import { RespondentProfileSurveyGet } from "./endpoints/survey-info/respondentProfileSurveyGet";
