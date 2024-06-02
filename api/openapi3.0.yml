@@ -65,10 +65,50 @@ paths:
           application/json:
             schema:
               type: array
-              $ref: '#/components/schemas/QuestionStatistic'
+              items:
+                $ref: '#/components/schemas/QuestionStatistic'
       responses:
         '200':
           description: OK
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /question-statistic/{profileSurveyStatisticId}:
+    post:
+      tags:
+        - QuestionStatistic
+      summary: Returns profile survey question statistic from the system that the user has access to
+      description: Returns profile survey question statistic from the system that the user has access to
+      operationId: findQuestionStatisticByProfileSurveyStatisticIdAndQuestionStatisticFilter
+      parameters:
+        - schema:
+            type: string
+            description: Profile Survey Statistic Name Id
+          required: true
+          description: Profile Survey Statistic Name Id
+          name: profileSurveyStatisticId
+          in: path
+      requestBody:
+        description: QuestionStatistic filter
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/QuestionStatisticFilter'
+      responses:
+        '200':
+          description: QuestionStatistic response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/QuestionStatistic'
         default:
           description: unexpected error
           content:
@@ -408,6 +448,24 @@ components:
         count: 
           type: number
           format: int32
+    QuestionStatisticFilter:
+      type: object
+      required:
+        - question
+        - country
+      properties:
+        question: 
+          type: string
+        answer: 
+          type: string
+        minAge:
+          type: number
+          format: int32
+        maxAge:
+          type: number
+          format: int32
+        country:
+          type: string
     Error:
       type: object
       required:

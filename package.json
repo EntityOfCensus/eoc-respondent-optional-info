@@ -16,6 +16,7 @@
 		"@cloudflare/itty-router-openapi": "^1.0.1",
 		"@permaweb/aoconnect": "^0.0.55",
 		"@prisma/client": "^5.14.0",
+		"@prisma/extension-accelerate": "^1.1.0",
 		"jwt-claims": "^1.0.1"
 	},
 	"devDependencies": {

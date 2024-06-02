@@ -11,6 +11,12 @@ import { RespondentProfileSurveyCreate } from "./endpoints/survey-info/responden
 import { RespondentProfileSurveyGet } from "./endpoints/survey-info/respondentProfileSurveyGet";
 import { RespondentProfileSurveyPut } from "./endpoints/survey-info/respondentProfileSurveyPut";
 import { RespondentProfileSurveyDelete } from "./endpoints/survey-info/respondentProfileSurveyDelete";
+import { RespondentProfileSurveyIndexCreate } from "./endpoints/survey-info-index/respondentProfileSurveyIndexCreate";
+import { RespondentProfileSurveyIndexGet } from "./endpoints/survey-info-index/respondentProfileSurveyIndexGet";
+import { RespondentProfileSurveyIndexPut } from "./endpoints/survey-info-index/respondentProfileSurveyIndexPut";
+import { QuestionStatisticList } from "./endpoints/question-statistic/questionStatisticList";
+import { QuestionStatisticPost } from "./endpoints/question-statistic/questionStatisticPost";
+import { QuestionStatisticFilterRoute } from "./endpoints/question-statistic/questionStatisticFilter";
 
 export const router = OpenAPIRouter({
 	docs_url: "/",
@@ -33,6 +39,15 @@ router.post("/survey-info/", secure, RespondentProfileSurveyCreate);
 router.get("/survey-info/:id", secure, validatePathId, RespondentProfileSurveyGet);
 router.put("/survey-info/:id", secure, validatePathId, RespondentProfileSurveyPut);
 router.delete("/survey-info/:id", secure, validatePathId, RespondentProfileSurveyDelete);
+
+
+router.post("/survey-info-index/", secure, RespondentProfileSurveyIndexCreate);
+router.get("/survey-info-index/:id", secure, validatePathId, RespondentProfileSurveyIndexGet);
+router.put("/survey-info-index/:id", secure, validatePathId, RespondentProfileSurveyIndexPut);
+
+router.get("/question-statistic/", secure, QuestionStatisticList);
+router.post("/question-statistic/", secure, QuestionStatisticPost);
+router.post("/question-statistic/:profileSurveyStatisticId", secure, QuestionStatisticFilterRoute);
 
 router.registry.registerComponent(
 	'securitySchemes',

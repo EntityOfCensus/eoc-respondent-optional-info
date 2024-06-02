@@ -1,4 +1,4 @@
-import { DateTime, Str } from "@cloudflare/itty-router-openapi";
+import { DateTime, Str, Int, Arr } from "@cloudflare/itty-router-openapi";
 
 export const Task = {
 	name: new Str({ example: "lorem" }),
@@ -36,4 +36,32 @@ export const RespondentProfileSurvey = {
 	respondentOthentSub: String,
     targetGroups: TargetGroup 	
 };
+
+export const NewRespondentProfileSurveyIndex = {
+	currentSurveyId: String,
+	lastSurveyId: String,	
+}
+
+export const RespondentProfileSurveyIndex = {
+	othentId: String,
+	currentSurveyId: String,
+	lastSurveyId: String,	
+}
+
+export const QuestionStatistic = {
+	question: String,
+	answer: String,
+	dateOfBirth: DateTime,
+	country: String,
+	count: Int,
+	profileSurveyStatisticId: String,
+}
+
+export const QuestionStatisticFilter = {
+	question: String,
+	answer: String,
+	minAge: Int,
+	maxAge: Int,
+	country: String,
+}
 
