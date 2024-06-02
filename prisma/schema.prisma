@@ -38,6 +38,7 @@ model QuestionStatistic {
   answer String
   dateOfBirth  DateTime?
   country String
+  gender String @default("both")
   count Int
   profileSurveyStatistic ProfileSurveyStatistic @relation(fields: [profileSurveyStatisticId], references: [nameId])
   profileSurveyStatisticId String

@@ -12,7 +12,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
 servers:
-  - url: https://eoc-respondent-basic-info.infra-workers.workers.dev/
+  - url: https://eoc-respondent-optional-info.infra-workers.workers.dev/
   - url: http://localhost:8787
 paths:
   /question-statistic:
@@ -433,6 +433,7 @@ components:
         - answer
         - dateOfBirth
         - country
+        - gender
       properties:
         profileSurveyStatisticId: 
           type: string
@@ -445,6 +446,8 @@ components:
           format: date
         country:
           type: string
+        gender: 
+          type: string  
         count: 
           type: number
           format: int32
@@ -466,6 +469,8 @@ components:
           format: int32
         country:
           type: string
+        gender: 
+          type: string  
     Error:
       type: object
       required:

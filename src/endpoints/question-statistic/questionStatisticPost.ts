@@ -48,7 +48,8 @@ export class QuestionStatisticPost extends OpenAPIRoute {
 				where: {question: questionStatistic.question,
 						AND : {answer: questionStatistic.answer,
 							   AND: {dateOfBirth: (new Date(questionStatistic.dateOfBirth)).toISOString(),
-								     AND: {country: questionStatistic.country}}, 
+								     AND: {country: questionStatistic.country, 
+										AND: {gender: questionStatistic.gender}}}, 
 				    	}					
 			   }
 			});
@@ -72,6 +73,7 @@ export class QuestionStatisticPost extends OpenAPIRoute {
 						'answer': questionStatistic.answer,
 						'dateOfBirth': (new Date(questionStatistic.dateOfBirth)).toISOString(),
 						'country': questionStatistic.country,
+						'gender': questionStatistic.gender,
 						'count': questionStatistic.count,
 						'profileSurveyStatisticId': questionStatistic.profileSurveyStatisticId,
 					}	
