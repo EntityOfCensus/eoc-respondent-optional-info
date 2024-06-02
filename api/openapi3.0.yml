@@ -455,7 +455,9 @@ components:
       type: object
       required:
         - question
+        - answer
         - country
+        - gender
       properties:
         question: 
           type: string
