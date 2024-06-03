@@ -41,9 +41,9 @@ router.put("/survey-info/:id", secure, validatePathId, RespondentProfileSurveyPu
 router.delete("/survey-info/:id", secure, validatePathId, RespondentProfileSurveyDelete);
 
 
-router.post("/survey-info-index/", secure, RespondentProfileSurveyIndexCreate);
-router.get("/survey-info-index/:id", secure, validatePathId, RespondentProfileSurveyIndexGet);
-router.put("/survey-info-index/:id", secure, validatePathId, RespondentProfileSurveyIndexPut);
+router.post("/survey-index/", secure, RespondentProfileSurveyIndexCreate);
+router.get("/survey-index/:id", secure, validatePathId, RespondentProfileSurveyIndexGet);
+router.put("/survey-index/:id", secure, validatePathId, RespondentProfileSurveyIndexPut);
 
 router.get("/question-statistic/", secure, QuestionStatisticList);
 router.post("/question-statistic/", secure, QuestionStatisticPost);
