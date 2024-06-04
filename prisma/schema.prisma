@@ -24,6 +24,13 @@ model RespondentProfileSurveyIndex {
 
 }
 
+model RespondentProfileSurveyIndexHistory {
+  surveyId String @id
+  active Boolean 
+  
+  @@schema("respondent_profile_survey")
+}
+
 model ProfileSurveyStatistic {
   nameId String @id
   QuestionStatistic QuestionStatistic[]

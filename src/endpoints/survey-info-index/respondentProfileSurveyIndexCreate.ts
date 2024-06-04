@@ -57,6 +57,26 @@ export class RespondentProfileSurveyIndexCreate extends OpenAPIRoute {
 			  'lastSurveyId': data.body.lastSurveyId ? data.body.lastSurveyId : null
 			}      
 		  });
+		  await prisma.respondentProfileSurveyIndexHistory.upsert({
+			where: { surveyId: data.body.currentSurveyId },
+			update: {
+				'active': true
+			},
+			create: {
+				'surveyId': data.body.currentSurveyId,
+				'active': true
+			}})
+			if(data.body.lastSurveyId && data.body.lastSurveyId.length > 0) {
+				await prisma.respondentProfileSurveyIndexHistory.upsert({
+					where: { surveyId: data.body.lastSurveyId },
+					update: {
+						'active': false
+					},
+					create: {
+						'surveyId': data.body.lastSurveyId,
+						'active': false
+					}})		
+			}		
 
 		  return resBody;
 		
