@@ -33,7 +33,7 @@ export class QuestionStatisticPost extends OpenAPIRoute {
 		env: any,
 		context: any,
 		data: Record<string, any>
-	) {       
+	) {      
         const prisma = new PrismaClient({
             datasources: {
               db: {
@@ -41,6 +41,7 @@ export class QuestionStatisticPost extends OpenAPIRoute {
               },
             },
           }).$extends(withAccelerate());
+		  console.log("data.body",data.body)
 		  for(var i = 0; i < data.body.length; ++ i) {
 			let questionStatistic = data.body[i];	
 			console.log("data.body[" + i + "]", questionStatistic);
@@ -62,8 +63,12 @@ export class QuestionStatisticPost extends OpenAPIRoute {
 					}
 				}).then();	
 			} else {
-				await prisma.profileSurveyStatistic.create({
-					data: {
+				await prisma.profileSurveyStatistic.upsert({
+					where: {
+						nameId: questionStatistic.profileSurveyStatisticId
+					},
+					update: {},
+					create: {
 						'nameId': questionStatistic.profileSurveyStatisticId
 					}
 				})
