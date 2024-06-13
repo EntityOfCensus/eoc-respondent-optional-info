@@ -33,7 +33,6 @@ model RespondentProfileSurveyIndexHistory {
 
 model ProfileSurveyStatistic {
   nameId String @id
-  QuestionStatistic QuestionStatistic[]
 
   @@schema("respondent_profile_survey")
 
@@ -48,7 +47,6 @@ model QuestionStatistic {
   gender String @default("both")
   category String
   count Int
-  profileSurveyStatistic ProfileSurveyStatistic @relation(fields: [profileSurveyStatisticId], references: [nameId])
   profileSurveyStatisticId String
 
   @@schema("respondent_profile_survey")
