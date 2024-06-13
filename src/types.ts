@@ -54,6 +54,7 @@ export const QuestionStatistic = {
 	dateOfBirth: DateTime,
 	country: String,
 	gender: String,
+	category: String,
 	count: Int,
 	profileSurveyStatisticId: String,
 }
@@ -64,6 +65,7 @@ export const QuestionStatisticFilter = {
 	minAge: Int,
 	maxAge: Int,
 	country: String,
-	gender: String
+	gender: String,
+	category: String
 }
 
