@@ -64,18 +64,6 @@ export class QuestionStatisticPost extends OpenAPIRoute {
 					}
 				}).then();	
 			} else {
-				let profileSurveyStatistic = await prisma.profileSurveyStatistic.findFirst({
-					where: {
-						nameId: questionStatistic.profileSurveyStatisticId
-					}
-				})
-				if(!profileSurveyStatistic) {
-					await prisma.profileSurveyStatistic.create({
-						data: {
-							'nameId': questionStatistic.profileSurveyStatisticId
-						}
-					})
-				}
 				await prisma.questionStatistic.create({
 					data: {
 						'question': questionStatistic.question,
