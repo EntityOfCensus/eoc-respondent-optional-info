@@ -42,7 +42,7 @@ export class QuestionStatisticPost extends OpenAPIRoute {
             },
           }).$extends(withAccelerate());
 		  console.log("data.body",data.body)
-		  await prisma.questionStatistic.create({
+		  await prisma.questionStatistic.createMany({
 			data: data.body	
 		});
 		//   for(var i = 0; i < data.body.length; ++ i) {
