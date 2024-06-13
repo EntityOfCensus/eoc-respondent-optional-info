@@ -62,7 +62,7 @@ export class QuestionStatisticPost extends OpenAPIRoute {
 					data: {
 						'count': questionStatisticRow.count + questionStatistic.count
 					}
-				}).then();	
+				});	
 			} else {
 				await prisma.questionStatistic.create({
 					data: {
