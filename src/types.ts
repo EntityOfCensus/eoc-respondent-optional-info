@@ -1,11 +1,11 @@
-import { DateTime, Str, Int, Arr } from "@cloudflare/itty-router-openapi";
+import { DateOnly, Str, Int, Arr } from "@cloudflare/itty-router-openapi";
 
 export const Task = {
 	name: new Str({ example: "lorem" }),
 	slug: String,
 	description: new Str({ required: false }),
 	completed: Boolean,
-	due_date: new DateTime(),
+	due_date: DateOnly,
 };
 
 export const Question = {
@@ -51,7 +51,7 @@ export const RespondentProfileSurveyIndex = {
 export const QuestionStatistic = {
 	question: String,
 	answer: String,
-	dateOfBirth: DateTime,
+	dateOfBirth: DateOnly,
 	country: String,
 	gender: String,
 	category: String,
