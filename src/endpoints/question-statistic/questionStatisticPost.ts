@@ -42,43 +42,46 @@ export class QuestionStatisticPost extends OpenAPIRoute {
             },
           }).$extends(withAccelerate());
 		  console.log("data.body",data.body)
-		  for(var i = 0; i < data.body.length; ++ i) {
-			let questionStatistic = data.body[i];	
-			console.log("data.body[" + i + "]", questionStatistic);
-			let questionStatisticRow = await prisma.questionStatistic.findFirst({
-				where: {question: questionStatistic.question,
-						AND : {answer: questionStatistic.answer,
-							   AND: {dateOfBirth: (new Date(questionStatistic.dateOfBirth)).toISOString(),
-								     AND: {country: questionStatistic.country, 
-										AND: {gender: questionStatistic.gender,
-											AND: {category: questionStatistic.category}}}}, 
-				    	}					
-			   }
-			});
-			console.log("questionStatisticRow", questionStatisticRow);
-			if(questionStatisticRow) {
-				await prisma.questionStatistic.update({
-					where: {id: questionStatisticRow.id },
-					data: {
-						'count': questionStatisticRow.count + questionStatistic.count
-					}
-				});	
-			} else {
-				await prisma.questionStatistic.create({
-					data: {
-						'question': questionStatistic.question,
-						'answer': questionStatistic.answer,
-						'dateOfBirth': (new Date(questionStatistic.dateOfBirth)).toISOString(),
-						'country': questionStatistic.country,
-						'gender': questionStatistic.gender,
-						'category': questionStatistic.category,
-						'count': questionStatistic.count,
-						'profileSurveyStatisticId': questionStatistic.profileSurveyStatisticId,
-					}	
-				});
+		  await prisma.questionStatistic.create({
+			data: data.body	
+		});
+		//   for(var i = 0; i < data.body.length; ++ i) {
+		// 	let questionStatistic = data.body[i];	
+		// 	console.log("data.body[" + i + "]", questionStatistic);
+		// 	let questionStatisticRow = await prisma.questionStatistic.findFirst({
+		// 		where: {question: questionStatistic.question,
+		// 				AND : {answer: questionStatistic.answer,
+		// 					   AND: {dateOfBirth: (new Date(questionStatistic.dateOfBirth)).toISOString(),
+		// 						     AND: {country: questionStatistic.country, 
+		// 								AND: {gender: questionStatistic.gender,
+		// 									AND: {category: questionStatistic.category}}}}, 
+		// 		    	}					
+		// 	   }
+		// 	});
+		// 	console.log("questionStatisticRow", questionStatisticRow);
+		// 	if(questionStatisticRow) {
+		// 		await prisma.questionStatistic.update({
+		// 			where: {id: questionStatisticRow.id },
+		// 			data: {
+		// 				'count': questionStatisticRow.count + questionStatistic.count
+		// 			}
+		// 		});	
+		// 	} else {
+		// 		await prisma.questionStatistic.create({
+		// 			data: {
+		// 				'question': questionStatistic.question,
+		// 				'answer': questionStatistic.answer,
+		// 				'dateOfBirth': (new Date(questionStatistic.dateOfBirth)).toISOString(),
+		// 				'country': questionStatistic.country,
+		// 				'gender': questionStatistic.gender,
+		// 				'category': questionStatistic.category,
+		// 				'count': questionStatistic.count,
+		// 				'profileSurveyStatisticId': questionStatistic.profileSurveyStatisticId,
+		// 			}	
+		// 		});
 	
-			}
-		  }
+		// 	}
+		//   }
 		return {};
 	}
     
